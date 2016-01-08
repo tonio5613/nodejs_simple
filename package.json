@@ -1,0 +1,25 @@
+{
+  "dependencies": {
+    "body-parser": "^1.14.2",
+    "express": "^4.13.3",
+    "mongojs": "^2.2.2"
+  },
+  "scripts": {
+    "start": "node server.js"
+  },
+  "name": "mean-simple-nodejs",
+  "description": "Mickael Projet",
+  "version": "0.0.1",
+  "main": "server.js",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tonio5613/nodejs_simple.git"
+  },
+  "author": "Antoine Donniou",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tonio5613/nodejs_simple/issues"
+  },
+  "homepage": "https://github.com/tonio5613/nodejs_simple#readme"
+}
