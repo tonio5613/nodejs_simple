@@ -2,7 +2,9 @@
   "dependencies": {
     "body-parser": "^1.14.2",
     "express": "^4.13.3",
-    "mongojs": "^2.2.2"
+    "fs": "0.0.2",
+    "mongojs": "^2.2.2",
+    "travis": "^0.1.1"
   },
   "scripts": {
     "start": "node server.js"

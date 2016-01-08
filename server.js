@@ -2,6 +2,7 @@
 var express = require('express');
 var app = express();
 var mongojs = require('mongojs');
+var fs = require('fs'); // this engine requires the fs module
 
 var db = mongojs('contactlist',['contactlist']);
 var bodyParser = require('body-parser'); 
@@ -23,7 +24,21 @@ app.use(bodyParser.json());
  //, port = process.env.PORT || 3000
 
 
-//var mongoose   = require('mongoose');
+//Template engine
+
+app.engine('ntl', function (filePath, options, callback) { // define the template engine
+  fs.readFile(filePath, function (err, content) {
+    if (err) return callback(new Error(err));
+    // this is an extremely simple template engine
+    var rendered = content.toString().replace('#title#', '<h1>'+ options.title +'</h1>')
+    .replace('#message#', '<p>'+ options.message +'</p>');
+
+    return callback(null, rendered);
+  })
+});
+app.set('views', './views'); // specify the views directory
+app.set('view engine', 'ntl'); // register the template engine
+
 //mongoose.connect('localhost:27017/todos'); // connect to our database
 
 
@@ -31,6 +46,8 @@ app.use(bodyParser.json());
 	//res.send("Hello");
 //	next();
 //});
+
+
 app.route('/route1')
 .get(function(req, res){
 	//res.render('/public/index');
@@ -38,6 +55,10 @@ app.route('/route1')
 	res.status(200).send('<h1>Welcome to Jade</h1>');
 });
 
+var mongo_data = db.contactlist.find(function(err,docs){
+	//console.log(docs);
+	//res.json(docs);
+	});
 
 app.get('/contactlist',function(req, res){
 	//res.send("Hello");
@@ -70,6 +91,13 @@ db.contactlist.find(function(err,docs){
 	console.log(docs);
 	res.json(docs);
 	});
+});
+
+app.get('/template', function (req, res) {
+  res.render('index', { title: 'Mon premier template', message: 'le texte'});
+  console.log(app.get('env')); //development
+  console.log(app.get('etag')); //weak
+  console.log(app.get('jsonp callback name'));//calback
 });
 
 app.post('/contactlist',function(req, res){
