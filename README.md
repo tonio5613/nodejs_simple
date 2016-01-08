@@ -5,8 +5,8 @@ https://www.youtube.com/watch?v=kHV7gOHvNdk
 
 ## Install nodejs modules
 
-npm install express mongojs body-parser 
+`npm install`
 
 ## Run
 
-node server.js
+`node server.js`
